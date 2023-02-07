@@ -15,40 +15,62 @@ import {
   ProfileHeader,
   ProfileImage,
 } from "./styles";
+import { useEffect, useState } from "react";
+import { api } from "../../../../lib/axios";
+
+interface UserData {
+  name: string;
+  followers: number;
+  bio: string;
+  company: string;
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
 
 export function ProfileCard() {
+  const [userData, setUserData] = useState<UserData>({} as UserData);
+
+  async function fetchUserData() {
+    const response = await api.get("users/wagnermateus");
+
+    const data = response.data;
+
+    setUserData(data);
+  }
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   return (
     <ProfileCardContainer>
       <ProfileImage>
-        <img src={profileImg} alt="" />
+        <img src={userData.avatar_url} alt="" />
       </ProfileImage>
       <ProfileContent>
         <ProfileHeader>
-          <strong>Cameron Williamson</strong>
-          <a href="">
+          <strong>{userData.name}</strong>
+          <a href={userData.html_url} target="_blank">
             <span>GITHUB</span>
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </a>
         </ProfileHeader>
         <ProfileBioContainer>
-          <p>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </p>
+          <p>{userData.bio}</p>
         </ProfileBioContainer>
         <ProfileFooter>
           <ProfileFooterContent>
             <FontAwesomeIcon icon={faGithub} />
-            <span>cameronwll</span>
+            <span>{userData.login}</span>
           </ProfileFooterContent>
           <ProfileFooterContent>
             <FontAwesomeIcon icon={faBuilding} />
-            <span>Rocketseat</span>
+            <span>{userData.company}</span>
           </ProfileFooterContent>
           <ProfileFooterContent>
             <FontAwesomeIcon icon={faUserGroup} />
-            <span>32 seguidores</span>
+            <span>{userData.followers} seguidores</span>
           </ProfileFooterContent>
         </ProfileFooter>
       </ProfileContent>

@@ -24,12 +24,14 @@ export const ProfileHeader = styled.header`
   display: flex;
   margin-bottom: 0.5rem;
   margin-right: 2rem;
+
   strong {
     flex: 1;
     font-weight: 700;
     font-size: 1.5rem;
     color: ${(props) => props.theme["base-title"]};
   }
+
   a {
     display: flex;
     align-items: center;
@@ -69,7 +71,9 @@ export const ProfileImage = styled.article`
   margin-left: 2.5rem;
 
   img {
-    width: 100%;
+    width: 9.25rem;
+    height: 9.25rem;
+    border-radius: 8px;
   }
 `;
 export const ProfileFooter = styled.footer`

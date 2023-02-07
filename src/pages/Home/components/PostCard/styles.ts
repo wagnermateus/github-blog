@@ -26,12 +26,10 @@ export const PostContent = styled.article`
     cursor: pointer;
   }
 
-  p {
-    line-height: 1.6;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  blockquote {
   }
 `;
+
 export const PostHeader = styled.header`
   display: flex;
   justify-content: space-between;
@@ -49,4 +47,13 @@ export const PostHeader = styled.header`
     font-size: 0.875rem;
     color: ${(props) => props.theme["base-span"]};
   }
+`;
+
+export const MarkdownText = styled.div`
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 `;
