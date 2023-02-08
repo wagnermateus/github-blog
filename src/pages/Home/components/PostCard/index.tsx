@@ -1,32 +1,12 @@
-import { useEffect, useState } from "react";
-import { api } from "../../../../lib/axios";
+import { useContext } from "react";
 import { MarkdownText, PostContainer, PostContent, PostHeader } from "./styles";
 import ReactMarkdown from "react-markdown";
-import { dateFormatter } from "../../../../utilis/formatter";
-
-interface Issues {
-  number: number;
-  title: string;
-  created_at: Date;
-  body: string;
-}
+import { formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { IssueContexts } from "../../../../contexts/IssuesContexts";
 
 export function PostCard() {
-  const [issues, setIssues] = useState<Issues[]>([]);
-
-  async function feecthIssues() {
-    const response = await api.get(
-      "/search/issues?q=repo:wagnermateus/github-blog"
-    );
-
-    const data = response.data.items;
-
-    setIssues(data);
-  }
-
-  useEffect(() => {
-    feecthIssues();
-  }, []);
+  const { issues } = useContext(IssueContexts);
 
   return (
     <PostContainer>
@@ -35,7 +15,12 @@ export function PostCard() {
           <PostContent key={issue.number}>
             <PostHeader>
               <strong>{issue.title}</strong>
-              <span>{dateFormatter.format(new Date(issue.created_at))}</span>
+              <span>
+                {formatDistanceToNow(new Date(issue.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+              </span>
             </PostHeader>
             <MarkdownText>
               <ReactMarkdown>{issue.body}</ReactMarkdown>

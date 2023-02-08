@@ -33,17 +33,18 @@ export const PostContent = styled.article`
 export const PostHeader = styled.header`
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 
   strong {
-    max-width: 17.6875rem;
-
     font-size: 1.25rem;
     font-weight: 700;
     color: ${(props) => props.theme["base-title"]};
   }
 
   span {
-    display: inline-block;
+    line-height: 1.6;
+
+    white-space: nowrap;
     font-size: 0.875rem;
     color: ${(props) => props.theme["base-span"]};
   }
