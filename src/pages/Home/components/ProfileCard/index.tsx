@@ -70,7 +70,11 @@ export function ProfileCard() {
           </ProfileFooterContent>
           <ProfileFooterContent>
             <FontAwesomeIcon icon={faUserGroup} />
-            <span>{userData.followers} seguidores</span>
+            <span>
+              {userData.followers === 1
+                ? `${userData.followers} seguidor`
+                : `${userData.followers} seguidores`}{" "}
+            </span>
           </ProfileFooterContent>
         </ProfileFooter>
       </ProfileContent>

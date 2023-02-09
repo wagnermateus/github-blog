@@ -6,12 +6,18 @@ export const ProfileCardContainer = styled.section`
   gap: 2rem;
   align-items: center;
 
-  width: 54rem;
+  width: 100%;
   height: 13.25rem;
 
   border-radius: 10px;
   box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
   margin-top: -5.5rem;
+
+  @media (max-width: 512px) {
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+  }
 `;
 
 export const ProfileContent = styled.article`
@@ -57,6 +63,9 @@ export const ProfileHeader = styled.header`
       border-bottom: 1px solid ${(props) => props.theme.blue};
     }
   }
+
+  @media (max-width: 512px) {
+  }
 `;
 
 export const ProfileBioContainer = styled.div`
@@ -79,8 +88,14 @@ export const ProfileImage = styled.article`
 export const ProfileFooter = styled.footer`
   display: flex;
   gap: 1.5rem;
+
+  @media (max-width: 900px) {
+    gap: 0.5rem;
+    margin-right: 1rem;
+  }
 `;
 export const ProfileFooterContent = styled.div`
   display: flex;
   gap: 0.5rem;
+  white-space: nowrap;
 `;

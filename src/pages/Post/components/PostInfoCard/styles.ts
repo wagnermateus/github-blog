@@ -5,7 +5,7 @@ export const PostInfoContainer = styled.section`
   display: flex;
   flex-direction: column;
 
-  width: 54rem;
+  width: 100%;
   height: 10.5rem;
   padding: 2rem;
 
@@ -18,6 +18,10 @@ export const PostInfoContainer = styled.section`
     font-weight: 700;
     font-size: 1.5rem;
     color: ${(props) => props.theme["base-title"]};
+  }
+
+  @media (max-width: 482px) {
+    height: 100%;
   }
 `;
 export const PostInfoHeader = styled.header`
@@ -51,10 +55,20 @@ export const PostInfoHeader = styled.header`
 export const PostInfoFooter = styled.footer`
   display: flex;
   gap: 1.5rem;
+
+  @media (max-width: 414px) {
+    gap: 0.5rem;
+    flex-direction: column;
+  }
 `;
 export const PostInfoFooterContent = styled.div`
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   margin-top: 0.5rem;
   color: ${(props) => props.theme["base-span"]};
+  white-space: nowrap;
+
+  @media (max-width: 414px) {
+  }
 `;

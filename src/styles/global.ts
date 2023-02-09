@@ -24,5 +24,14 @@ button, a {
    }
 }
 
+html{
+@media(max-width:768px){
 
+  font-size: 85%;
+}
+@media(max-width:334px){
+
+font-size: 80%;
+}
+}
 `;

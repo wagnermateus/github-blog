@@ -12,33 +12,51 @@ import {
   PostInfoFooterContent,
   PostInfoHeader,
 } from "./styles";
+import { Link } from "react-router-dom";
+interface PostInfoProps {
+  title: string;
+  comments: number;
+  html_url: string;
+  created_at: string;
+  user: string;
+}
 
-export function PostInfo() {
+export function PostInfo({
+  title,
+  comments,
+  html_url,
+  created_at,
+  user,
+}: PostInfoProps) {
   return (
     <PostInfoContainer>
       <PostInfoHeader>
-        <a href="">
+        <Link to={"/"}>
           <FontAwesomeIcon icon={faChevronLeft} />
           <span>VOLTAR</span>
-        </a>
-        <a href="">
+        </Link>
+        <a href={html_url} target="_blank">
           <span>VER NO GITHUB</span>
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
       </PostInfoHeader>
-      <strong>JavaScript data types and data structures</strong>
+      <strong>{title}</strong>
       <PostInfoFooter>
         <PostInfoFooterContent>
           <FontAwesomeIcon icon={faGithub} />
-          <span>cameronwll</span>
+          <span>{user}</span>
         </PostInfoFooterContent>
         <PostInfoFooterContent>
           <FontAwesomeIcon icon={faCalendarDay} />
-          <span>Há 1 dia</span>
+          <span>{created_at}</span>
         </PostInfoFooterContent>
         <PostInfoFooterContent>
           <FontAwesomeIcon icon={faComment} />
-          <span>5 comentários</span>
+          <span>
+            {comments == 1
+              ? `${comments} comentário`
+              : `${comments} comentários`}
+          </span>
         </PostInfoFooterContent>
       </PostInfoFooter>
     </PostInfoContainer>

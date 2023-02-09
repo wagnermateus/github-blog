@@ -7,12 +7,21 @@ export const PostContainer = styled.section`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2rem;
   grid-row-gap: 2rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 `;
 export const PostContent = styled.article`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-
   width: 26rem;
   height: 16.25rem;
 
@@ -23,10 +32,10 @@ export const PostContent = styled.article`
 
   &:hover {
     border: 2px solid ${(props) => props.theme["base-label"]};
-    cursor: pointer;
   }
 
-  blockquote {
+  @media (max-width: 900px) {
+    width: 20rem;
   }
 `;
 

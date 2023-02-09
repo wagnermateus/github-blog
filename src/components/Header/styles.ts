@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header`
   max-width: 100vw;
   height: 18.5rem;
 
-  img {
-    width: 100%;
-  }
+  background-image: url("/src/assets/headerbg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 `;
