@@ -4,9 +4,11 @@ import { HomeContainer } from "./styles";
 import * as zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+
 import { IssueContexts } from "../../contexts/IssuesContexts";
 import { SyncLoader } from "react-spinners";
+import { useContextSelector } from "use-context-selector";
+
 const searchFormSchema = zod.object({
   content: zod.string(),
 });
@@ -14,16 +16,19 @@ const searchFormSchema = zod.object({
 type SearchFormInputs = zod.infer<typeof searchFormSchema>;
 
 export function Home() {
-  const {
-    handleSubmit,
-    register,
-    formState: { isLoading },
-  } = useForm<SearchFormInputs>({
+  const { handleSubmit, register } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
   });
 
-  const { fecthIssues, totalPosts, homepageDataIsLoading } =
-    useContext(IssueContexts);
+  const fecthIssues = useContextSelector(IssueContexts, (context) => {
+    return context.fecthIssues;
+  });
+  const homepageDataIsLoading = useContextSelector(IssueContexts, (context) => {
+    return context.homepageDataIsLoading;
+  });
+  const totalPosts = useContextSelector(IssueContexts, (context) => {
+    return context.totalPosts;
+  });
 
   function handleSearchIssue(data: SearchFormInputs) {
     fecthIssues(data.content);

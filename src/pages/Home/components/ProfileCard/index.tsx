@@ -1,4 +1,3 @@
-import profileImg from "../../../../assets/profileImg.svg";
 import {
   faArrowUpRightFromSquare,
   faBuilding,

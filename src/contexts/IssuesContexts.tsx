@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
+import { createContext } from "use-context-selector";
 import { api } from "../lib/axios";
 
 interface Issues {
@@ -24,25 +25,29 @@ export function IssueProvider({ children }: IssuesProviderProps) {
   const [totalPosts, setTotalPosts] = useState(0);
   const [homepageDataIsLoading, setHomepageDataIsLoading] = useState(true);
 
-  async function fecthIssues(content?: string) {
-    if (content === undefined) {
-      content = "";
-    }
-    const response = await api.get("/search/issues?", {
-      params: {
-        q: `repo:wagnermateus/github-blog ${content}`,
-      },
-    });
+  const fecthIssues = useCallback(
+    async (content?: string) => {
+      if (content === undefined) {
+        content = "";
+      }
+      const response = await api.get("/search/issues?", {
+        params: {
+          q: `repo:wagnermateus/github-blog ${content}`,
+        },
+      });
 
-    const dataItems = response.data.items;
-    const dataTotalCount = response.data.total_count;
+      const dataItems = response.data.items;
+      const dataTotalCount = response.data.total_count;
 
-    setIssues(dataItems);
+      setIssues(dataItems);
 
-    setTotalPosts(dataTotalCount);
+      setTotalPosts(dataTotalCount);
 
-    setHomepageDataIsLoading(false);
-  }
+      setHomepageDataIsLoading(false);
+    },
+    [issues, totalPosts, homepageDataIsLoading]
+  );
+
   useEffect(() => {
     fecthIssues();
   }, []);
